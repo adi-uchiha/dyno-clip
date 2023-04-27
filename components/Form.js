@@ -11,13 +11,6 @@ const Form = ({ formId, petForm, forNewPet = true }) => {
   const [form, setForm] = useState({
     name: petForm.name,
     owner_name: petForm.owner_name,
-    species: petForm.species,
-    age: petForm.age,
-    poddy_trained: petForm.poddy_trained,
-    diet: petForm.diet,
-    image_url: petForm.image_url,
-    likes: petForm.likes,
-    dislikes: petForm.dislikes,
   })
 
   /* The PUT method edits an existing entry in the mongodb database. */
@@ -88,8 +81,6 @@ const Form = ({ formId, petForm, forNewPet = true }) => {
     let err = {}
     if (!form.name) err.name = 'Name is required'
     if (!form.owner_name) err.owner_name = 'Owner is required'
-    if (!form.species) err.species = 'Species is required'
-    if (!form.image_url) err.image_url = 'Image URL is required'
     return err
   }
 
@@ -124,65 +115,6 @@ const Form = ({ formId, petForm, forNewPet = true }) => {
           value={form.owner_name}
           onChange={handleChange}
           required
-        />
-
-        <label htmlFor="species">Species</label>
-        <input
-          type="text"
-          maxLength="30"
-          name="species"
-          value={form.species}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="age">Age</label>
-        <input
-          type="number"
-          name="age"
-          value={form.age}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="poddy_trained">Potty Trained</label>
-        <input
-          type="checkbox"
-          name="poddy_trained"
-          checked={form.poddy_trained}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="diet">Diet</label>
-        <textarea
-          name="diet"
-          maxLength="60"
-          value={form.diet}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="image_url">Image URL</label>
-        <input
-          type="url"
-          name="image_url"
-          value={form.image_url}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="likes">Likes</label>
-        <textarea
-          name="likes"
-          maxLength="60"
-          value={form.likes}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="dislikes">Dislikes</label>
-        <textarea
-          name="dislikes"
-          maxLength="60"
-          value={form.dislikes}
-          onChange={handleChange}
         />
 
         <button type="submit" className="btn">
