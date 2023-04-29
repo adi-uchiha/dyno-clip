@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import dbConnect from '../lib/dbConnect'
-import Pet from '../models/Pet'
+import Pet from '../models/Clip'
 
 const Index = ({ pets }) => (
   <>
