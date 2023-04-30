@@ -2,14 +2,14 @@ import mongoose from 'mongoose'
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
 const ClipSchema = new mongoose.Schema({
-  owner: {
+  clipKey: {
     /* The name of this pet */
 
     type: String,
     required: [true, 'Please provide a name for this pet.'],
     maxlength: [60, 'Name cannot be more than 60 characters'],
   },
-  pet: {
+  content: {
     /* The owner of this pet */
 
     type: String,
