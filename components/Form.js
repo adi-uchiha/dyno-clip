@@ -6,7 +6,7 @@ const Form = ({ formId, clipForm, forNewPet = true }) => {
   const router = useRouter()
   const contentType = 'application/json'
   const [errors, setErrors] = useState({})
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState()
 
   const [form, setForm] = useState({
     clipKey: clipForm.clipKey,
@@ -82,7 +82,7 @@ const Form = ({ formId, clipForm, forNewPet = true }) => {
   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
     let err = {}
-    if (!form.name) err.name = 'Name is required'
+    if (!form.clip) err.name = 'Name is required'
     if (!form.owner_name) err.owner_name = 'Owner is required'
     return err
   }
@@ -90,11 +90,8 @@ const Form = ({ formId, clipForm, forNewPet = true }) => {
   const handleSubmit = (e) => {
     console.log(form)
     e.preventDefault()
-    const errs = formValidate()
-    if (Object.keys(errs).length === 0) {
+    if (true) {
       forNewPet ? postData(form) : putData(form)
-    } else {
-      setErrors({ errs })
     }
   }
 
