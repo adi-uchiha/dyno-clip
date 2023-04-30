@@ -1,12 +1,12 @@
 import Form from '../components/Form'
 
-const NewPet = () => {
-  const petForm = {
-    name: '',
-    owner_name: '',
+const NewClip = () => {
+  const clipForm = {
+    clipKey: '',
+    content: '',
   }
 
-  return <Form formId="add-pet-form" petForm={petForm} />
+  return <Form formId="add-pet-form" clipForm={clipForm} />
 }
 
-export default NewPet
+export default NewClip

@@ -2,15 +2,15 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { mutate } from 'swr'
 
-const Form = ({ formId, petForm, forNewPet = true }) => {
+const Form = ({ formId, clipForm, forNewPet = true }) => {
   const router = useRouter()
   const contentType = 'application/json'
   const [errors, setErrors] = useState({})
   const [message, setMessage] = useState('')
 
   const [form, setForm] = useState({
-    name: petForm.name,
-    owner_name: petForm.owner_name,
+    clipKey: clipForm.clipKey,
+    content: clipForm.content,
   })
 
   /* The PUT method edits an existing entry in the mongodb database. */
@@ -65,15 +65,18 @@ const Form = ({ formId, petForm, forNewPet = true }) => {
   }
 
   const handleChange = (e) => {
-    const target = e.target
-    const value =
-      target.name === 'poddy_trained' ? target.checked : target.value
-    const name = target.name
 
-    setForm({
-      ...form,
-      [name]: value,
-    })
+    if(e.target.name === 'clipKey') {
+      setForm({
+        clipKey: e.target.value,
+        content: form.content
+      })
+    } else {
+      setForm({
+        clipKey: form.clipKey,
+        content: e.target.value
+      })
+    }
   }
 
   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
@@ -85,6 +88,7 @@ const Form = ({ formId, petForm, forNewPet = true }) => {
   }
 
   const handleSubmit = (e) => {
+    console.log(form)
     e.preventDefault()
     const errs = formValidate()
     if (Object.keys(errs).length === 0) {
@@ -101,8 +105,8 @@ const Form = ({ formId, petForm, forNewPet = true }) => {
         <input
           type="text"
           maxLength="20"
-          name="name"
-          value={form.name}
+          name="clipKey"
+          value={form.clipKey}
           onChange={handleChange}
           required
         />
@@ -112,7 +116,7 @@ const Form = ({ formId, petForm, forNewPet = true }) => {
           type="text"
           maxLength="20"
           name="owner_name"
-          value={form.owner_name}
+          value={form.content}
           onChange={handleChange}
           required
         />
