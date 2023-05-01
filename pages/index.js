@@ -1,26 +1,26 @@
 import Link from 'next/link'
 import dbConnect from '../lib/dbConnect'
-import Pet from '../models/Clip'
+import Clip from '../models/Clip'
 
-const Index = ({ pets }) => (
+const Index = ({ clips }) => (
   <>
     {/* Create a card for each pet */}
-    {pets.map((pet) => (
-      <div key={pet._id}>
+    {clips.map((clip) => (
+      <div key={clip._id}>
         <div className="card">
-          <img src={pet.image_url} />
-          <h5 className="pet-name">{pet.name}</h5>
+          <img src={clip.image_url} />
+          <h5 className="pet-name">{clip.clipKey}</h5>
           <div className="main-content">
-            <p className="pet-name">{pet.name}</p>
-            <p className="owner">Owner: {pet.owner_name}</p>
+            <p className="pet-name">{clip.clipKey}</p>
+            <p className="owner">Owner: {clip.content}</p>
 
             {/* Extra Pet Info: Likes and Dislikes */}
 
             <div className="btn-container">
-              <Link href="/[id]/edit" as={`/${pet._id}/edit`} legacyBehavior>
+              <Link href="/[id]/edit" as={`/${clip._id}/edit`} legacyBehavior>
                 <button className="btn edit">Edit</button>
               </Link>
-              <Link href="/[id]" as={`/${pet._id}`} legacyBehavior>
+              <Link href="/[id]" as={`/${clip._id}`} legacyBehavior>
                 <button className="btn view">View</button>
               </Link>
             </div>
@@ -36,14 +36,15 @@ export async function getServerSideProps() {
   await dbConnect()
 
   /* find all the data in our database */
-  const result = await Pet.find({})
-  const pets = result.map((doc) => {
-    const pet = doc.toObject()
-    pet._id = pet._id.toString()
-    return pet
+  const result = await Clip.find({})
+  console.log(result)
+  const clips = result.map((doc) => {
+    const clip = doc.toObject()
+    clip._id = clip._id.toString()
+    return clip
   })
 
-  return { props: { pets: pets } }
+  return { props: { clips: clips } }
 }
 
 export default Index

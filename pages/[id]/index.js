@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import dbConnect from '../../lib/dbConnect'
-import Pet from '../../models/Pet'
+import Clip from '../../models/Clip'
 
 /* Allows you to view pet card info and delete pet card*/
 const PetPage = ({ pet }) => {
@@ -66,9 +66,9 @@ const PetPage = ({ pet }) => {
 export async function getServerSideProps({ params }) {
   await dbConnect()
 
-  const pet = await Pet.findById(params.id).lean()
+  const pet = await Clip.findById(params.id).lean()
   pet._id = pet._id.toString()
-
+  console.log(pet)
   return { props: { pet } }
 }
 
