@@ -4,7 +4,6 @@ import Clip from '../models/Clip'
 
 const Index = ({ clips }) => (
   <>
-    {/* Create a card for each pet */}
     {clips.map((clip) => (
       <div key={clip._id}>
         <div className="card">
